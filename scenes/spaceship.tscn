@@ -30,7 +30,8 @@ shape = SubResource("CapsuleShape2D_y0r1h")
 
 [node name="Weapon1" parent="." unique_id=1874413792 instance=ExtResource("4_v0rat")]
 position = Vector2(-20, -23)
-firing_range = 100
+firing_range = 500
+firing_radius = 90
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

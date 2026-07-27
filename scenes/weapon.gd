@@ -9,4 +9,4 @@ func setup(ship_res: ShipResource) -> void:
 
 
 func _on_firing_range_fire(_pos: Vector2) -> void:
-	$FX.emitting = true
+	$FX.restart()

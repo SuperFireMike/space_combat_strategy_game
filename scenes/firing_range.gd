@@ -42,8 +42,9 @@ func change_range(firing_range: int, firing_radius: float) -> void:
 	points.append(Vector2.ZERO)
 	
 	var spread := deg_to_rad(firing_radius)
-	var start_angle := -spread / 2
-	var end_angle := spread / 2
+	var direction_offset := -PI / 2
+	var start_angle := direction_offset - spread / 2
+	var end_angle := direction_offset + spread / 2
 	
 	var arc_len := firing_range * spread
 	

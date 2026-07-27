@@ -48,8 +48,4 @@ func act(delta: float) -> void:
 
 
 func _ready() -> void:
-	$firing_range.setup(res, $CollisionPolygon2D)
-
-
-func _on_firing_range_fire(pos: Vector2) -> void:
-	print("Fire %s" % [pos])
+	$Weapon1.setup(res)

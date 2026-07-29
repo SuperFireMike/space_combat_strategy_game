@@ -11,6 +11,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 gradient = SubResource("Gradient_bmw2d")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7oc0d"]
+resource_local_to_scene = true
 lifetime_randomness = 0.3
 particle_flag_disable_z = true
 particle_flag_damping_as_friction = true

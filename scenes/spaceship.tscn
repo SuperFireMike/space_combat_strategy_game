@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bjmo5cd0cekje" path="res://graphics/spaceships/gunner_ship.png" id="1_yqmju"]
 [ext_resource type="Script" uid="uid://lfk5b3nfmqhy" path="res://resources/spaceship_resource.gd" id="2_v0rat"]
 [ext_resource type="PackedScene" uid="uid://bbydvfdvjjhmu" path="res://scenes/weapon.tscn" id="4_v0rat"]
+[ext_resource type="PackedScene" uid="uid://qma6646p7hxy" path="res://scenes/health_component.tscn" id="5_me4wu"]
 
 [sub_resource type="Resource" id="Resource_v0rat"]
 resource_local_to_scene = true
@@ -30,10 +31,35 @@ texture = ExtResource("1_yqmju")
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_y0r1h")
 
-[node name="Weapon1" parent="." unique_id=1874413792 instance=ExtResource("4_v0rat")]
-position = Vector2(-20, -23)
+[node name="HealthComponent" parent="." unique_id=804603846 instance=ExtResource("5_me4wu")]
+max_hp = 3
+
+[node name="Weapons" type="Node2D" parent="." unique_id=633592678]
+
+[node name="Weapon1" parent="Weapons" unique_id=1874413792 instance=ExtResource("4_v0rat")]
+position = Vector2(-28, -21)
 firing_range = 500
 firing_radius = 90
+reload_time = 2.5
+
+[node name="Weapon2" parent="Weapons" unique_id=523181747 instance=ExtResource("4_v0rat")]
+position = Vector2(-10, -21)
+firing_range = 500
+firing_radius = 90
+reload_time = 3.0
+
+[node name="Weapon3" parent="Weapons" unique_id=577021570 instance=ExtResource("4_v0rat")]
+position = Vector2(9, -19)
+firing_range = 500
+firing_radius = 90
+reload_time = 4.0
+
+[node name="Weapon4" parent="Weapons" unique_id=20866707 instance=ExtResource("4_v0rat")]
+position = Vector2(29, -15)
+firing_range = 500
+firing_radius = 90
+reload_time = 5.0
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="die" from="HealthComponent" to="." method="get_destroyed"]

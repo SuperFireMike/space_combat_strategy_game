@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dx3n73x7yo2cn"]
 
 [ext_resource type="PackedScene" uid="uid://bugpf8s420m4i" path="res://scenes/spaceship.tscn" id="1_2q6dc"]
+[ext_resource type="Script" uid="uid://dtnlgxv7r2ifk" path="res://scenes/level.gd" id="1_w8frs"]
 [ext_resource type="Script" uid="uid://lfk5b3nfmqhy" path="res://resources/spaceship_resource.gd" id="2_w7c3h"]
 
 [sub_resource type="Resource" id="Resource_w8frs"]
@@ -15,6 +16,7 @@ faction = 1
 metadata/_custom_type_script = "uid://lfk5b3nfmqhy"
 
 [node name="Level" type="Node2D" unique_id=1198086395]
+script = ExtResource("1_w8frs")
 
 [node name="Objects" type="Node2D" parent="." unique_id=964715371]
 
@@ -24,5 +26,6 @@ res = SubResource("Resource_w8frs")
 
 [node name="Spaceship2" parent="Objects" unique_id=491045095 instance=ExtResource("1_2q6dc")]
 position = Vector2(1076, 75)
+full_hp = 15
 res = SubResource("Resource_mx8sn")
 metadata/_scene_painted = true

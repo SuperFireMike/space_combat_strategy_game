@@ -1,9 +1,9 @@
 class_name Spaceship
 extends CharacterBody2D
 
-
 @export var speed := 300
 @export var rotation_speed := 3
+@export var full_hp := 3
 
 var direction: Vector2
 var destination: Vector2
@@ -48,4 +48,15 @@ func act(delta: float) -> void:
 
 
 func _ready() -> void:
-	$Weapon1.setup(res)
+	for weapon: Weapon in $Weapons.get_children():
+		weapon.setup(self)
+	res.health_component = $HealthComponent
+	$HealthComponent.max_hp = full_hp
+
+
+func get_destroyed() -> void:
+	queue_free()
+
+
+func hit(hp: int) -> void:
+	$HealthComponent.cur_hp -= hp

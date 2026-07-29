@@ -44,4 +44,11 @@ process_material = SubResource("ParticleProcessMaterial_7oc0d")
 
 [node name="firing_range" parent="." unique_id=801767313 instance=ExtResource("2_uxn4k")]
 
-[connection signal="fire" from="firing_range" to="." method="_on_firing_range_fire"]
+[node name="Timers" type="Node" parent="." unique_id=56721913]
+
+[node name="ReloadTimer" type="Timer" parent="Timers" unique_id=1752276581]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="target_in_range" from="firing_range" to="." method="_on_first_target_in_range"]
+[connection signal="timeout" from="Timers/ReloadTimer" to="." method="_on_reload_timer_timeout"]

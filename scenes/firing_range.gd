@@ -1,40 +1,30 @@
 class_name FiringRange
 extends Area2D
 
-signal fire(pos: Vector2)
+signal target_in_range()
 
 var ship_res: ShipResource
 var target: Spaceship = null
 var ready_to_fire := true
 
+var targets_in_range: Array[Spaceship]
 
-func setup(res: ShipResource, firing_range: int, firing_radius: float) -> void:
+func setup(res: ShipResource, firing_range: int, firing_radius: float, targets_array: Array[Spaceship]) -> void:
 	ship_res = res
+	targets_in_range = targets_array
 	change_range(firing_range, firing_radius)
 
 
-func _on_body_entered(body: Node2D) -> void:
-	if body is not Spaceship: return
-	var ship := body as Spaceship
+func _on_body_entered(ship: Spaceship) -> void:
 	if ship_res.faction != ship.res.faction:
-		target = ship
-		signal_fire()
+		targets_in_range.append(ship)
+		if targets_in_range.size() == 1 and not (get_parent() as Weapon).is_reloading:
+			target_in_range.emit()
 
 
-func _on_reload_timer_timeout() -> void:
-	if target:
-		signal_fire()
-
-
-func signal_fire() -> void:
-	if not ready_to_fire: return
-	fire.emit(target.global_position)
-	$Timers/ReloadTimer.start()
-
-
-func _on_body_exited(body: Node2D) -> void:
-	if body == target:
-		target = null
+func _on_body_exited(ship: Spaceship) -> void:
+	if ship_res.faction != ship.res.faction:
+		targets_in_range.erase(ship)
 
 
 func change_range(firing_range: int, firing_radius: float) -> void:

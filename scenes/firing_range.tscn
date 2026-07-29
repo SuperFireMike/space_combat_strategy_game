@@ -3,17 +3,12 @@
 [ext_resource type="Script" uid="uid://b1bopa7m0lksh" path="res://scenes/firing_range.gd" id="1_y50tw"]
 
 [node name="firing_range" type="Area2D" unique_id=801767313]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_y50tw")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1211534482]
 polygon = PackedVector2Array(-52, -1, 47, -1, 47, -26, -53, -26)
 
-[node name="Timers" type="Node" parent="." unique_id=1347453923]
-
-[node name="ReloadTimer" type="Timer" parent="Timers" unique_id=1343390684]
-wait_time = 1.5
-one_shot = true
-
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
-[connection signal="timeout" from="Timers/ReloadTimer" to="." method="_on_reload_timer_timeout"]

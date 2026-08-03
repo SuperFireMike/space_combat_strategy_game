@@ -3,13 +3,15 @@
 [ext_resource type="PackedScene" uid="uid://bugpf8s420m4i" path="res://scenes/spaceship.tscn" id="1_2q6dc"]
 [ext_resource type="Script" uid="uid://dtnlgxv7r2ifk" path="res://scenes/level.gd" id="1_w8frs"]
 [ext_resource type="Script" uid="uid://lfk5b3nfmqhy" path="res://resources/spaceship_resource.gd" id="2_w7c3h"]
+[ext_resource type="PackedScene" uid="uid://ccos8bsdw72x5" path="res://scenes/player_controller.tscn" id="4_ppgk2"]
+[ext_resource type="PackedScene" uid="uid://3oo1eotbu5wy" path="res://scenes/ai_controller.tscn" id="5_2r41h"]
 
-[sub_resource type="Resource" id="Resource_w8frs"]
+[sub_resource type="Resource" id="Resource_klq6b"]
 resource_local_to_scene = true
 script = ExtResource("2_w7c3h")
 metadata/_custom_type_script = "uid://lfk5b3nfmqhy"
 
-[sub_resource type="Resource" id="Resource_mx8sn"]
+[sub_resource type="Resource" id="Resource_b121j"]
 resource_local_to_scene = true
 script = ExtResource("2_w7c3h")
 faction = 1
@@ -20,12 +22,18 @@ script = ExtResource("1_w8frs")
 
 [node name="Objects" type="Node2D" parent="." unique_id=964715371]
 
-[node name="Spaceship" parent="Objects" unique_id=1741532549 instance=ExtResource("1_2q6dc")]
+[node name="Spaceship" parent="Objects" unique_id=1741532549 node_paths=PackedStringArray("controller") instance=ExtResource("1_2q6dc")]
 position = Vector2(887, 723)
-res = SubResource("Resource_w8frs")
+controller = NodePath("PlayerController")
+res = SubResource("Resource_klq6b")
 
-[node name="Spaceship2" parent="Objects" unique_id=491045095 instance=ExtResource("1_2q6dc")]
+[node name="PlayerController" parent="Objects/Spaceship" unique_id=534599155 instance=ExtResource("4_ppgk2")]
+
+[node name="Spaceship2" parent="Objects" unique_id=491045095 node_paths=PackedStringArray("controller") instance=ExtResource("1_2q6dc")]
 position = Vector2(1076, 75)
 full_hp = 15
-res = SubResource("Resource_mx8sn")
+controller = NodePath("AiController")
+res = SubResource("Resource_b121j")
 metadata/_scene_painted = true
+
+[node name="AiController" parent="Objects/Spaceship2" unique_id=1346936426 instance=ExtResource("5_2r41h")]

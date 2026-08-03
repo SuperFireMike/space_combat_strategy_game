@@ -2,8 +2,11 @@ class_name Spaceship
 extends CharacterBody2D
 
 @export var speed := 300
-@export var rotation_speed := 3
+@export var turn_speed: float = 3
+@export var stopping_speed: float = 700
 @export var full_hp := 3
+
+@export var controller: ShipController
 
 var direction: Vector2
 var destination: Vector2
@@ -15,18 +18,14 @@ var acting := false
 
 
 func _physics_process(delta: float) -> void:
-	get_input()
-	velocity = direction * speed
-	if acting: act(delta)
+	rotation += controller.rotation * turn_speed * delta
+	var forward_dir := transform.x
+	if controller.direction:
+		velocity = forward_dir * controller.direction * speed
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO, stopping_speed * delta)
+	#if acting: act(delta)
 	move_and_slide()
-
-
-func get_input() -> void:
-	if mouse_in_range and Input.is_action_just_pressed("select"):
-		selected = not selected
-	if Input.is_action_just_pressed("action") and selected:
-		destination = get_global_mouse_position()
-		acting = true
 
 
 func _on_mouse_entered() -> void:
@@ -43,7 +42,7 @@ func act(delta: float) -> void:
 			direction = Vector2.ZERO
 	else:
 		var target_angle = global_position.angle_to_point(destination)
-		global_rotation = lerp_angle(global_rotation, target_angle, rotation_speed * delta)
+		global_rotation = lerp_angle(global_rotation, target_angle, turn_speed * delta)
 		direction = Vector2.from_angle(global_rotation)
 
 
